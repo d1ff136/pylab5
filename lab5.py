@@ -3,15 +3,14 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# Папка, де лежить
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_FILE = os.path.join(BASE_DIR, "Варіант_9_spotify.csv")
 
 # =====================================================
-# Завдання 1. Зміна температури повітря (варіант 7)
+# Завдання 1. Зміна температури повітря (варіант 9)
 # =====================================================
-time = [3, 5, 7, 9, 10, 11, 12, 13, 15, 17, 19, 20, 21, 22, 23]
-temp1 = [22, 22, 22.3, 23, 24, 24, 24, 24, 24.5, 24, 23.5, 23.5, 23, 22.8, 22]
+time = [0, 2, 4, 6, 8, 10, 12, 13, 14, 15, 16, 18, 20, 22, 23]
+temp1 = [7, 7, 7.3, 7, 8, 9, 8, 9, 8.5, 9, 9.2, 9.5, 10, 10.3, 11]
 
 plt.figure(figsize=(9, 5))
 plt.plot(time, temp1, color="tomato", marker="o", linestyle="-", linewidth=2,
@@ -26,9 +25,9 @@ plt.savefig(os.path.join(BASE_DIR, "task1_temperature.png"), dpi=150)
 plt.show()
 
 # =====================================================
-# Завдання 2. y = sin x, z = cos x на [-6; 6], крок 0.2
+# Завдання 2. y = sin x, z = cos x на [-8; 8], крок 0.2
 # =====================================================
-x = np.arange(-6, 6 + 0.2, 0.2)
+x = np.arange(-8, 8 + 0.2, 0.2)
 y = np.sin(x)
 z = np.cos(x)
 
@@ -47,15 +46,15 @@ plt.savefig(os.path.join(BASE_DIR, "task2_sin_cos.png"), dpi=150)
 plt.show()
 
 # =====================================================
-# Завдання 3. Поверхня z = 2x*sin(x) + 3y*cos(y) на [-6; 6], крок 0.2
+# Завдання 3. Поверхня z = 2x*sin(x) + 3y*cos(y) на [-8; 8], крок 0.2
 # =====================================================
 def surface(X, Y):
     return 2 * X * np.sin(X) + 3 * Y * np.cos(Y)
 
 
 # 3.1 np.arange()
-xa = np.arange(-6, 6 + 0.2, 0.2)
-ya = np.arange(-6, 6 + 0.2, 0.2)
+xa = np.arange(-8, 8 + 0.2, 0.2)
+ya = np.arange(-8, 8 + 0.2, 0.2)
 Xa, Ya = np.meshgrid(xa, ya)
 Za = surface(Xa, Ya)
 
@@ -71,9 +70,9 @@ plt.tight_layout()
 plt.savefig(os.path.join(BASE_DIR, "task3_surface_arange.png"), dpi=150)
 plt.show()
 
-# 3.2 np.linspace(): (12 / 0.2) + 1 = 61 точка -> крок 0.2
-xl = np.linspace(-6, 6, 61)
-yl = np.linspace(-6, 6, 61)
+# 3.2 np.linspace(): (16 / 0.2) + 1 = 81 точка -> крок 0.2
+xl = np.linspace(-8, 8, 81)
+yl = np.linspace(-8, 8, 81)
 Xl, Yl = np.meshgrid(xl, yl)
 Zl = surface(Xl, Yl)
 
@@ -90,12 +89,12 @@ plt.savefig(os.path.join(BASE_DIR, "task3_surface_linspace.png"), dpi=150)
 plt.show()
 
 # =====================================================
-# Завдання 4-5. Набір даних (з лабораторної роботи №4)
+# Завдання 4-5. Набір даних з лабораторної роботи №4
 # =====================================================
 df = pd.read_csv(DATA_FILE, encoding="utf-8-sig")
 df.columns = df.columns.str.strip()
 
-# Числові ознаки
+# Числові ознаки (стовпець Date - текст, тому він сюди не потрапляє)
 num_cols = df.select_dtypes(include="number").columns.tolist()
 
 # ---- Завдання 4. Кругова діаграма ----
@@ -115,7 +114,7 @@ plt.savefig(os.path.join(BASE_DIR, "task4_pie.png"), dpi=150)
 plt.show()
 
 # ---- Завдання 5. Гістограма ----
-#пісня HUMBLE.
+# пісня HUMBLE.
 column = [c for c in df.columns if "HUMBLE" in c.upper()][0]
 
 plt.figure(figsize=(9, 5))
